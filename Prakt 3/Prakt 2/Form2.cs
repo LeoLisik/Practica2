@@ -14,12 +14,15 @@ namespace Prakt_2
 {
     public partial class RegisterForm : Form
     {
+        MyDelegate d;
         private string SavedLoginText;
-        public RegisterForm()
+        public RegisterForm(MyDelegate sender)
         {
             InitializeComponent();
             RepeatPasswordPlace.Text = "Не требуется для входа";
             RepeatPasswordPlace.PasswordChar = '\0';
+            d = sender;
+            d("A");
         }
 
         private void Login(object sender, EventArgs e)
@@ -27,6 +30,7 @@ namespace Prakt_2
             RepeatPasswordPlace.Text = PasswordPlace.Text;
             if (CheckRegister())
             {
+                ProgrammWait();
                 RepeatPasswordPlace.Text = "Не требуется для входа";
                 RepeatPasswordPlace.PasswordChar = '\0';
                 string[] Accounts = File.ReadAllLines("Accounts.txt");
@@ -46,7 +50,26 @@ namespace Prakt_2
                         }
                     }
                     MessageBox.Show("Неверный логин и/или пароль!");
-                } catch { MessageBox.Show("Файлы программы повреждены. Попробуйте переустановить программу."); }
+                } catch { MessageBox.Show("Файлы программы повреждены. Попробуйте переустановить программу."); } finally { ProgrammWait(); }
+            } else 
+            {
+                RepeatPasswordPlace.Text = "Не требуется для входа";
+                RepeatPasswordPlace.PasswordChar = '\0';
+            }
+        }
+
+        private void ProgrammWait()
+        {
+            ButtonEnter.Enabled = !ButtonEnter.Enabled;
+            ButtonRegister.Enabled = !ButtonRegister.Enabled;
+            if (ButtonEnter.Enabled == true)
+            {
+                ButtonRegister.Text = "Зарегистрироваться";
+                ButtonEnter.Text = "Войти";
+            } else
+            {
+                ButtonRegister.Text = "Подождите...";
+                ButtonEnter.Text = "Подождите...";
             }
         }
 
@@ -65,8 +88,7 @@ namespace Prakt_2
         {
             if (CheckRegister()) 
             {
-                ButtonRegister.Text = "Подождите...";
-                ButtonRegister.Enabled = false;
+                ProgrammWait();
                 string HashLogin;
                 HashLogin = BCrypt.Net.BCrypt.HashPassword(LoginPlace.Text);
                 string[] Accounts = File.ReadAllLines("Accounts.txt");
@@ -78,8 +100,7 @@ namespace Prakt_2
                         {
                             LoginPlace.Text = "Имя занято";
                             LoginPlace.ForeColor = Color.Red;
-                            ButtonRegister.Enabled = true;
-                            ButtonRegister.Text = "Зарегистрироваться";
+                            ProgrammWait();
                             return;
                         }
                     }
@@ -87,6 +108,8 @@ namespace Prakt_2
                     sw.WriteLine(HashLogin + ':' + BCrypt.Net.BCrypt.HashPassword(PasswordPlace.Text));
                     sw.Close();
                     MessageBox.Show("Вы успешно зарегистрировались!");
+                    ProgrammWait();
+                    Login(new object(), new EventArgs());
                 } catch { MessageBox.Show("Файлы программы повреждены. Попробуйте переустановить программу.");  }
             }
         }
@@ -109,6 +132,11 @@ namespace Prakt_2
             RepeatPasswordPlace.ForeColor = Color.Black;
             RepeatPasswordPlace.Text = "";
             RepeatPasswordPlace.PasswordChar = '*';
+        }
+
+        private void NonAuthorizeButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

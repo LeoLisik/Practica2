@@ -19,4 +19,9 @@ namespace Prakt_2
             Application.Run(new Programm());
         }
     }
+
+    static class Data
+    {
+        public static string Value { get; set; }
+    }
 }

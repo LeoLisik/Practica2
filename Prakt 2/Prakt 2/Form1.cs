@@ -1,21 +1,20 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.Drawing;
-using System.IO;
 
 namespace Prakt_2
 {
     public partial class Programm : Form
     {
         int SecondsSpend, MoveCount;
-        Button[] buttons;
-        Form AccountForm;
+        Button[] buttons; 
         public Programm()
         {
             InitializeComponent();
             ChangePosition(new object(), new EventArgs());
             buttons = new Button[] { Dice0, Dice1, Dice2, Dice3, Dice4, Dice5, Dice6, Dice7,
                 Dice8, Dice9, Dice10, Dice11, Dice12, Dice13, Dice14, Dice15 };
+            StartGame(new object(), new EventArgs());
         }
 
         private void MoveDice(object sender, EventArgs e)
@@ -27,36 +26,38 @@ namespace Prakt_2
                 buttons[ButtonPressedId].Text = "16";
                 buttons[ButtonPressedId - 4].Visible = true;
                 buttons[ButtonPressedId].Visible = false;
-                MoveCount++;
-                LabelMoveCount.Text = "Передвинуто цифр: " + MoveCount;
+                IncreaseMoveCount();
             } else if (ButtonPressedId + 4 <= 15 && buttons[ButtonPressedId + 4].Text == "16")
             {
                 buttons[ButtonPressedId + 4].Text = buttons[ButtonPressedId].Text;
                 buttons[ButtonPressedId].Text = "16";
                 buttons[ButtonPressedId + 4].Visible = true;
                 buttons[ButtonPressedId].Visible = false;
-                MoveCount++;
-                LabelMoveCount.Text = "Передвинуто цифр: " + MoveCount;
+                IncreaseMoveCount();
             }
             if (ButtonPressedId % 4 != 0 && buttons[ButtonPressedId - 1].Text == "16") {
                 buttons[ButtonPressedId - 1].Text = buttons[ButtonPressedId].Text;
                 buttons[ButtonPressedId].Text = "16";
                 buttons[ButtonPressedId - 1].Visible = true;
                 buttons[ButtonPressedId].Visible = false;
-                MoveCount++;
-                LabelMoveCount.Text = "Передвинуто цифр: " + MoveCount;
+                IncreaseMoveCount();
             } else if (ButtonPressedId % 4 != 3 && buttons[ButtonPressedId + 1].Text == "16")
             {
                 buttons[ButtonPressedId + 1].Text = buttons[ButtonPressedId].Text;
                 buttons[ButtonPressedId].Text = "16";
                 buttons[ButtonPressedId + 1].Visible = true;
                 buttons[ButtonPressedId].Visible = false;
-                MoveCount++;
-                LabelMoveCount.Text = "Передвинуто цифр: " + MoveCount;
+                IncreaseMoveCount();
             }
             if (CheckWin()) {
                 Win();
             }
+        }
+
+        private void IncreaseMoveCount()
+        {
+            MoveCount++;
+            LabelMoveCount.Text = "Передвинуто цифр: " + MoveCount;
         }
 
         private void Win()
@@ -67,13 +68,6 @@ namespace Prakt_2
                 Timer.Enabled = false;
             }
             MessageBox.Show("Ты выиграл!");
-            if (Data.Value != null && File.Exists("Leaderboards.txt"))
-            {
-                StreamWriter sw = new StreamWriter("Leaderboards.txt", true);
-                sw.WriteLine(Data.Value + ':' + SecondsSpend + ':' + MoveCount);
-                sw.Close();
-                MessageBox.Show("Твой результат был записан в рекорды.");
-            } else { MessageBox.Show("Для записи рекорда зарегистрируйся. Если по прежнему появляется это сообщение - переустанови программу."); }
         }
 
         private void Timer_Tick(object sender, EventArgs e)
@@ -114,7 +108,7 @@ namespace Prakt_2
 
         private void StartGame(object sender, EventArgs e)
         {
-            //RandomizeDice();
+            RandomizeDice();
             Timer.Enabled = true;
             LabelTimeSpend.Text = "Прошло: 0 Сек";
             LabelMoveCount.Text = "Передвинуто цифр: 0";
@@ -142,6 +136,7 @@ namespace Prakt_2
             TableMacket.Visible = !TableMacket.Visible;
             Label PauseText = new Label();
             PauseText.AutoSize = true;
+            PauseText.Font = new Font("Sans-serif", 11);
             PauseText.Text = "Игра на паузе. Нажмите P для продолжения...";
             PauseText.Location = new Point(this.Width / 2 - PauseText.Size.Width, this.Height / 2);
             this.Controls.Add(PauseText);
@@ -161,21 +156,6 @@ namespace Prakt_2
         private void PressedButtons(object sender, KeyEventArgs e)
         {
             if (e.KeyValue == 'P' && ButtonPause.Enabled) { PauseGame(new object(), new EventArgs()); }
-        }
-
-        private void AccountMenu(object sender, EventArgs e)
-        {
-            if (buttons[15].Enabled == true)
-            {
-                PauseGame(new object(), new EventArgs());
-            }
-            AccountForm = new RegisterForm();
-            AccountForm.ShowDialog();
-        }
-
-        private void Leaders(object sender, EventArgs e)
-        {
-
         }
     }
 }

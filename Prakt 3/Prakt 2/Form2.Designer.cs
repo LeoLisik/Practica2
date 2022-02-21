@@ -38,31 +38,35 @@ namespace Prakt_2
             this.TextRepeatPassword = new System.Windows.Forms.Label();
             this.RepeatPasswordPlace = new System.Windows.Forms.TextBox();
             this.ButtonEnter = new System.Windows.Forms.Button();
+            this.NonAuthorizeButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // LoginPlace
             // 
-            this.LoginPlace.Location = new System.Drawing.Point(75, 23);
+            this.LoginPlace.Location = new System.Drawing.Point(100, 28);
+            this.LoginPlace.Margin = new System.Windows.Forms.Padding(4);
             this.LoginPlace.Name = "LoginPlace";
-            this.LoginPlace.Size = new System.Drawing.Size(155, 20);
+            this.LoginPlace.Size = new System.Drawing.Size(205, 22);
             this.LoginPlace.TabIndex = 0;
             this.LoginPlace.Enter += new System.EventHandler(this.InputLogin);
             // 
             // PasswordPlace
             // 
-            this.PasswordPlace.Location = new System.Drawing.Point(75, 76);
+            this.PasswordPlace.Location = new System.Drawing.Point(100, 94);
+            this.PasswordPlace.Margin = new System.Windows.Forms.Padding(4);
             this.PasswordPlace.Name = "PasswordPlace";
             this.PasswordPlace.PasswordChar = '*';
-            this.PasswordPlace.Size = new System.Drawing.Size(155, 20);
+            this.PasswordPlace.Size = new System.Drawing.Size(205, 22);
             this.PasswordPlace.TabIndex = 1;
             this.PasswordPlace.Enter += new System.EventHandler(this.InputPassword);
             // 
             // ButtonRegister
             // 
             this.ButtonRegister.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.ButtonRegister.Location = new System.Drawing.Point(12, 158);
+            this.ButtonRegister.Location = new System.Drawing.Point(16, 194);
+            this.ButtonRegister.Margin = new System.Windows.Forms.Padding(4);
             this.ButtonRegister.Name = "ButtonRegister";
-            this.ButtonRegister.Size = new System.Drawing.Size(145, 44);
+            this.ButtonRegister.Size = new System.Drawing.Size(193, 54);
             this.ButtonRegister.TabIndex = 2;
             this.ButtonRegister.Text = "Зарегистрироваться";
             this.ButtonRegister.UseVisualStyleBackColor = false;
@@ -71,56 +75,73 @@ namespace Prakt_2
             // TextLogin
             // 
             this.TextLogin.AutoSize = true;
-            this.TextLogin.Location = new System.Drawing.Point(133, 7);
+            this.TextLogin.Location = new System.Drawing.Point(177, 9);
+            this.TextLogin.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.TextLogin.Name = "TextLogin";
-            this.TextLogin.Size = new System.Drawing.Size(38, 13);
+            this.TextLogin.Size = new System.Drawing.Size(47, 17);
             this.TextLogin.TabIndex = 3;
             this.TextLogin.Text = "Логин";
             // 
             // TextPassword
             // 
             this.TextPassword.AutoSize = true;
-            this.TextPassword.Location = new System.Drawing.Point(133, 60);
+            this.TextPassword.Location = new System.Drawing.Point(177, 74);
+            this.TextPassword.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.TextPassword.Name = "TextPassword";
-            this.TextPassword.Size = new System.Drawing.Size(45, 13);
+            this.TextPassword.Size = new System.Drawing.Size(57, 17);
             this.TextPassword.TabIndex = 4;
             this.TextPassword.Text = "Пароль";
             // 
             // TextRepeatPassword
             // 
             this.TextRepeatPassword.AutoSize = true;
-            this.TextRepeatPassword.Location = new System.Drawing.Point(105, 108);
+            this.TextRepeatPassword.Location = new System.Drawing.Point(140, 133);
+            this.TextRepeatPassword.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.TextRepeatPassword.Name = "TextRepeatPassword";
-            this.TextRepeatPassword.Size = new System.Drawing.Size(100, 13);
+            this.TextRepeatPassword.Size = new System.Drawing.Size(130, 17);
             this.TextRepeatPassword.TabIndex = 5;
             this.TextRepeatPassword.Text = "Повторите пароль";
             // 
             // RepeatPasswordPlace
             // 
-            this.RepeatPasswordPlace.Location = new System.Drawing.Point(75, 124);
+            this.RepeatPasswordPlace.Location = new System.Drawing.Point(100, 153);
+            this.RepeatPasswordPlace.Margin = new System.Windows.Forms.Padding(4);
             this.RepeatPasswordPlace.Name = "RepeatPasswordPlace";
             this.RepeatPasswordPlace.PasswordChar = '*';
-            this.RepeatPasswordPlace.Size = new System.Drawing.Size(155, 20);
+            this.RepeatPasswordPlace.Size = new System.Drawing.Size(205, 22);
             this.RepeatPasswordPlace.TabIndex = 6;
             this.RepeatPasswordPlace.Enter += new System.EventHandler(this.InputRepeatPassword);
             // 
             // ButtonEnter
             // 
             this.ButtonEnter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.ButtonEnter.Location = new System.Drawing.Point(153, 158);
+            this.ButtonEnter.Location = new System.Drawing.Point(204, 194);
+            this.ButtonEnter.Margin = new System.Windows.Forms.Padding(4);
             this.ButtonEnter.Name = "ButtonEnter";
-            this.ButtonEnter.Size = new System.Drawing.Size(146, 44);
+            this.ButtonEnter.Size = new System.Drawing.Size(195, 54);
             this.ButtonEnter.TabIndex = 7;
             this.ButtonEnter.Text = "Войти";
             this.ButtonEnter.UseVisualStyleBackColor = false;
             this.ButtonEnter.Click += new System.EventHandler(this.Login);
             // 
+            // NonAuthorizeButton
+            // 
+            this.NonAuthorizeButton.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.NonAuthorizeButton.Location = new System.Drawing.Point(321, -3);
+            this.NonAuthorizeButton.Name = "NonAuthorizeButton";
+            this.NonAuthorizeButton.Size = new System.Drawing.Size(92, 94);
+            this.NonAuthorizeButton.TabIndex = 8;
+            this.NonAuthorizeButton.Text = "Играть без авторизации";
+            this.NonAuthorizeButton.UseVisualStyleBackColor = false;
+            this.NonAuthorizeButton.Click += new System.EventHandler(this.NonAuthorizeButton_Click);
+            // 
             // RegisterForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.ClientSize = new System.Drawing.Size(311, 214);
+            this.ClientSize = new System.Drawing.Size(412, 254);
+            this.Controls.Add(this.NonAuthorizeButton);
             this.Controls.Add(this.ButtonEnter);
             this.Controls.Add(this.RepeatPasswordPlace);
             this.Controls.Add(this.TextRepeatPassword);
@@ -130,8 +151,10 @@ namespace Prakt_2
             this.Controls.Add(this.PasswordPlace);
             this.Controls.Add(this.LoginPlace);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximumSize = new System.Drawing.Size(327, 253);
-            this.MinimumSize = new System.Drawing.Size(327, 253);
+            this.Margin = new System.Windows.Forms.Padding(4);
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(430, 301);
+            this.MinimumSize = new System.Drawing.Size(430, 301);
             this.Name = "RegisterForm";
             this.Text = "Вход";
             this.ResumeLayout(false);
@@ -149,5 +172,6 @@ namespace Prakt_2
         private System.Windows.Forms.Label TextRepeatPassword;
         private System.Windows.Forms.TextBox RepeatPasswordPlace;
         private System.Windows.Forms.Button ButtonEnter;
+        private System.Windows.Forms.Button NonAuthorizeButton;
     }
 }
