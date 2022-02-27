@@ -133,7 +133,7 @@ namespace Prakt_2
             this.NonAuthorizeButton.TabIndex = 8;
             this.NonAuthorizeButton.Text = "Играть без авторизации";
             this.NonAuthorizeButton.UseVisualStyleBackColor = false;
-            this.NonAuthorizeButton.Click += new System.EventHandler(this.NonAuthorizeButton_Click);
+            this.NonAuthorizeButton.Click += new System.EventHandler(this.NonAuthorizeEnter);
             // 
             // RegisterForm
             // 

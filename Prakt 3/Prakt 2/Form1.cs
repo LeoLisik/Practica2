@@ -5,14 +5,8 @@ using System.IO;
 
 namespace Prakt_2
 {
-    public delegate void MyDelegate(string data);
     public partial class Programm : Form
     {
-        void func(string param)
-        {
-            MessageBox.Show(param);
-        }
-
         int SecondsSpend, MoveCount;
         Button[] buttons; 
         string[] PlayersResults;
@@ -186,7 +180,7 @@ namespace Prakt_2
             {
                 PauseGame(new object(), new EventArgs());
             }
-            AccountForm = new RegisterForm(new MyDelegate(func));
+            AccountForm = new RegisterForm();
             AccountForm.ShowDialog();
         }
 

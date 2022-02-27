@@ -14,15 +14,12 @@ namespace Prakt_2
 {
     public partial class RegisterForm : Form
     {
-        MyDelegate d;
         private string SavedLoginText;
-        public RegisterForm(MyDelegate sender)
+        public RegisterForm()
         {
             InitializeComponent();
             RepeatPasswordPlace.Text = "Не требуется для входа";
             RepeatPasswordPlace.PasswordChar = '\0';
-            d = sender;
-            d("A");
         }
 
         private void Login(object sender, EventArgs e)
@@ -134,7 +131,7 @@ namespace Prakt_2
             RepeatPasswordPlace.PasswordChar = '*';
         }
 
-        private void NonAuthorizeButton_Click(object sender, EventArgs e)
+        private void NonAuthorizeEnter(object sender, EventArgs e)
         {
             this.Close();
         }
