@@ -9,14 +9,13 @@ namespace Prakt_2
     {
         int SecondsSpend, MoveCount;
         Button[] buttons; 
-        string[] PlayersResults;
+        string[] PlayersResults, SortPlayerResults;
         Form AccountForm, LeaderboardForm;
-        Label Title = new Label();
-        Label FasterPlayerStats = new Label();
-        Label SmarterPlayerStats = new Label();
+
         public Programm()
         {
             InitializeComponent();
+            DataProcessingLeaders();
             ChangePosition(new object(), new EventArgs());
             buttons = new Button[] { Dice0, Dice1, Dice2, Dice3, Dice4, Dice5, Dice6, Dice7,
                 Dice8, Dice9, Dice10, Dice11, Dice12, Dice13, Dice14, Dice15 };
@@ -74,6 +73,17 @@ namespace Prakt_2
             MessageBox.Show("Ты выиграл!");
             if (Data.Value != null && File.Exists("Leaderboard.txt"))
             {
+                string[] Leaders = File.ReadAllLines("Leaderboard.txt");
+                for (int i = 0; i < Leaders.Length; i++)
+                {
+                    if (Data.Value == Leaders[i].Split(':')[0] && SecondsSpend < Convert.ToInt32(Leaders[i].Split(':')[1]))
+                    {
+                        Leaders[i] = Data.Value + ':' + SecondsSpend + ':' + MoveCount;
+                        File.WriteAllLines("Leaderboard.txt", Leaders);
+                        MessageBox.Show("Твой результат обновлён!");
+                        return;
+                    }
+                }
                 StreamWriter sw = new StreamWriter("Leaderboard.txt", true);
                 sw.WriteLine(Data.Value + ':' + SecondsSpend + ':' + MoveCount);
                 sw.Close();
@@ -215,9 +225,26 @@ namespace Prakt_2
             LeaderboardForm.Controls.Add(SmarterPlayerStats);
             //////////////////////////////////////
             LeaderboardForm.Show();
+            DataProcessingLeaders();
         }
 
-        
+        private void DataProcessingLeaders()
+        {
+            SortPlayerResults = File.ReadAllLines("Leaderboard.txt");
+            string temp;
+            for (int i = 0; i < SortPlayerResults.Length; i++)
+            {
+                for (int j = 0; j < SortPlayerResults.Length; j++)
+                {
+                    if (Convert.ToInt32(SortPlayerResults[i].Split(':')[1]) < Convert.ToInt32(SortPlayerResults[j].Split(':')[1]))
+                    {
+                        temp = SortPlayerResults[i];
+                        SortPlayerResults[i] = SortPlayerResults[j];
+                        SortPlayerResults[j] = temp;
+                    }
+                }
+            }
+        }
 
         private void Leaders(object sender, EventArgs e)
         {
