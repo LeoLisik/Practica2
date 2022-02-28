@@ -15,7 +15,6 @@ namespace Prakt_2
         public Programm()
         {
             InitializeComponent();
-            DataProcessingLeaders();
             ChangePosition(new object(), new EventArgs());
             buttons = new Button[] { Dice0, Dice1, Dice2, Dice3, Dice4, Dice5, Dice6, Dice7,
                 Dice8, Dice9, Dice10, Dice11, Dice12, Dice13, Dice14, Dice15 };
@@ -200,8 +199,17 @@ namespace Prakt_2
             LeaderboardForm.Text = "Рекорды";
             LeaderboardForm.Name = "LeaderboardForm";
             LeaderboardForm.Size = new Size(500, 500);
-            LeaderboardForm.Icon = new Icon("Fifteen.ico");
+            if (File.Exists("Fifteen.ico"))
+            {
+                LeaderboardForm.Icon = new Icon("Fifteen.ico");
+            } else
+            {
+                MessageBox.Show("Файлы программы повреждены!");
+                return;
+            }
             LeaderboardForm.BackColor = SystemColors.AppWorkspace;
+            LeaderboardForm.AutoScroll = true;
+            LeaderboardForm.MaximumSize = new Size(LeaderboardForm.Size.Width + 200, 1080);
             ////////////////////////////////////////
             Label Title = new Label();
             Title.Text = "Рекорды";
@@ -218,14 +226,32 @@ namespace Prakt_2
             LeaderboardForm.Controls.Add(FasterPlayerStats);
             //////////////////////////////////////
             Label SmarterPlayerStats = new Label();
-            SmarterPlayerStats.Text = PlayersResults[IdSmartest].Split(':')[0] + " был самым умным. Он победил передвинув кости всего " + PlayersResults[IdFastest].Split(':')[2] + " Раз.";
+            SmarterPlayerStats.Text = PlayersResults[IdSmartest].Split(':')[0] + " был самым умным. Он победил передвинув кости всего " + PlayersResults[IdSmartest].Split(':')[2] + " Раз.";
             SmarterPlayerStats.Font = new Font("Microsoft Sans Serif", 10);
             SmarterPlayerStats.AutoSize = true;
             SmarterPlayerStats.Location = new Point(10, FasterPlayerStats.Location.Y + FasterPlayerStats.Size.Height + SmarterPlayerStats.Size.Height);
             LeaderboardForm.Controls.Add(SmarterPlayerStats);
             //////////////////////////////////////
-            LeaderboardForm.Show();
+            Label StatisticLegend = new Label();
+            StatisticLegend.Text = "Имя  Время  Количество ходов";
+            StatisticLegend.Font = new Font("Microsoft Sans Serif", 12);
+            StatisticLegend.AutoSize = true;
+            StatisticLegend.Location = new Point(10, SmarterPlayerStats.Location.Y + SmarterPlayerStats.Size.Height + StatisticLegend.Size.Height / 2);
+            LeaderboardForm.Controls.Add(StatisticLegend);
+            //////////////////////////////////////
             DataProcessingLeaders();
+            Label[] StatsLabels = new Label[SortPlayerResults.Length];
+            for (int i = 0; i < SortPlayerResults.Length; i++)
+            {
+                StatsLabels[i] = new Label();
+                StatsLabels[i].Text = SortPlayerResults[i].Split(':')[0] + "  " + SortPlayerResults[i].Split(':')[1] + " сек. " + SortPlayerResults[i].Split(':')[2] + " ходов.";
+                StatsLabels[i].Font = new Font("Microsoft Sans Serif", 10);
+                StatsLabels[i].AutoSize = true;
+                StatsLabels[i].Location = new Point(10, StatisticLegend.Location.Y + StatisticLegend.Size.Height + StatsLabels[i].Size.Height * i);
+                LeaderboardForm.Controls.Add(StatsLabels[i]);
+            }
+            //////////////////////////////////////
+            LeaderboardForm.Show();
         }
 
         private void DataProcessingLeaders()
@@ -266,9 +292,11 @@ namespace Prakt_2
         }
         private string FindInArr()
         {
-            int SmallestTime = 10000, IdSmallestTime = -1, SmallestMoves = 10000, IdSmallestMoves = -1;
+            int SmallestTime, IdSmallestTime = -1, SmallestMoves, IdSmallestMoves = -1;
             try
             {
+                SmallestTime = Convert.ToInt32(PlayersResults[0].Split(':')[1]);
+                SmallestMoves = Convert.ToInt32(PlayersResults[0].Split(':')[2]);
                 for (int i = 0; i < PlayersResults.Length; i++)
                 {
                     if (Convert.ToInt32(PlayersResults[i].Split(':')[1]) < SmallestTime)

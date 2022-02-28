@@ -135,5 +135,15 @@ namespace Prakt_2
         {
             this.Close();
         }
+
+        private void BlockSymbolsInput(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == ':')
+            {
+                e.Handled = true;
+                MessageBox.Show(": запрещённый символ!");
+                return;
+            }
+        }
     }
 }
