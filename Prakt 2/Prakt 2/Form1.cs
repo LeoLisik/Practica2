@@ -7,46 +7,46 @@ namespace Prakt_2
     public partial class Programm : Form
     {
         int SecondsSpend, MoveCount;
-        Button[] buttons; 
+        Button[] Dices; 
         public Programm()
         {
             InitializeComponent();
             ChangePosition(new object(), new EventArgs());
-            buttons = new Button[] { Dice0, Dice1, Dice2, Dice3, Dice4, Dice5, Dice6, Dice7,
+            Dices = new Button[] { Dice0, Dice1, Dice2, Dice3, Dice4, Dice5, Dice6, Dice7,
                 Dice8, Dice9, Dice10, Dice11, Dice12, Dice13, Dice14, Dice15 };
             StartGame(new object(), new EventArgs());
         }
 
         private void MoveDice(object sender, EventArgs e)
         {
-            int ButtonPressedId = Array.IndexOf(buttons, sender as Button);
-            if (ButtonPressedId - 4 >= 0 && buttons[ButtonPressedId - 4].Text == "16")
+            int ButtonPressedId = Array.IndexOf(Dices, sender as Button);
+            if (ButtonPressedId - 4 >= 0 && Dices[ButtonPressedId - 4].Text == "16")
             {
-                buttons[ButtonPressedId - 4].Text = buttons[ButtonPressedId].Text; 
-                buttons[ButtonPressedId].Text = "16";
-                buttons[ButtonPressedId - 4].Visible = true;
-                buttons[ButtonPressedId].Visible = false;
+                Dices[ButtonPressedId - 4].Text = Dices[ButtonPressedId].Text; 
+                Dices[ButtonPressedId].Text = "16";
+                Dices[ButtonPressedId - 4].Visible = true;
+                Dices[ButtonPressedId].Visible = false;
                 IncreaseMoveCount();
-            } else if (ButtonPressedId + 4 <= 15 && buttons[ButtonPressedId + 4].Text == "16")
+            } else if (ButtonPressedId + 4 <= 15 && Dices[ButtonPressedId + 4].Text == "16")
             {
-                buttons[ButtonPressedId + 4].Text = buttons[ButtonPressedId].Text;
-                buttons[ButtonPressedId].Text = "16";
-                buttons[ButtonPressedId + 4].Visible = true;
-                buttons[ButtonPressedId].Visible = false;
+                Dices[ButtonPressedId + 4].Text = Dices[ButtonPressedId].Text;
+                Dices[ButtonPressedId].Text = "16";
+                Dices[ButtonPressedId + 4].Visible = true;
+                Dices[ButtonPressedId].Visible = false;
                 IncreaseMoveCount();
             }
-            if (ButtonPressedId % 4 != 0 && buttons[ButtonPressedId - 1].Text == "16") {
-                buttons[ButtonPressedId - 1].Text = buttons[ButtonPressedId].Text;
-                buttons[ButtonPressedId].Text = "16";
-                buttons[ButtonPressedId - 1].Visible = true;
-                buttons[ButtonPressedId].Visible = false;
+            if (ButtonPressedId % 4 != 0 && Dices[ButtonPressedId - 1].Text == "16") {
+                Dices[ButtonPressedId - 1].Text = Dices[ButtonPressedId].Text;
+                Dices[ButtonPressedId].Text = "16";
+                Dices[ButtonPressedId - 1].Visible = true;
+                Dices[ButtonPressedId].Visible = false;
                 IncreaseMoveCount();
-            } else if (ButtonPressedId % 4 != 3 && buttons[ButtonPressedId + 1].Text == "16")
+            } else if (ButtonPressedId % 4 != 3 && Dices[ButtonPressedId + 1].Text == "16")
             {
-                buttons[ButtonPressedId + 1].Text = buttons[ButtonPressedId].Text;
-                buttons[ButtonPressedId].Text = "16";
-                buttons[ButtonPressedId + 1].Visible = true;
-                buttons[ButtonPressedId].Visible = false;
+                Dices[ButtonPressedId + 1].Text = Dices[ButtonPressedId].Text;
+                Dices[ButtonPressedId].Text = "16";
+                Dices[ButtonPressedId + 1].Visible = true;
+                Dices[ButtonPressedId].Visible = false;
                 IncreaseMoveCount();
             }
             if (CheckWin()) {
@@ -62,7 +62,7 @@ namespace Prakt_2
 
         private void Win()
         {
-            foreach (Button Buff in buttons)
+            foreach (Button Buff in Dices)
             {
                 Buff.Enabled = false;
                 Timer.Enabled = false;
@@ -86,11 +86,11 @@ namespace Prakt_2
             {
                 FirstButtonId = rnd.Next() % 16;
                 LastButtonId = rnd.Next() % 16;
-                Buff = buttons[FirstButtonId].Text;
-                buttons[FirstButtonId].Text = buttons[LastButtonId].Text;
-                buttons[LastButtonId].Text = Buff;
+                Buff = Dices[FirstButtonId].Text;
+                Dices[FirstButtonId].Text = Dices[LastButtonId].Text;
+                Dices[LastButtonId].Text = Buff;
             }
-            foreach (Button buff in buttons)
+            foreach (Button buff in Dices)
             {
                 if (buff.Text == "16") { buff.Visible = false; }
                 else { buff.Visible = true; }
@@ -101,7 +101,7 @@ namespace Prakt_2
         {
             for (int i = 0; i < 16; i++)
             {
-                if (Convert.ToInt32(buttons[i].Text) != i + 1) { return false; }
+                if (Convert.ToInt32(Dices[i].Text) != i + 1) { return false; }
             }
             return true;
         }
@@ -115,7 +115,7 @@ namespace Prakt_2
             SecondsSpend = 0;
             MoveCount = 0;
             ButtonPause.Enabled = true;
-            foreach (Button Buff in buttons)
+            foreach (Button Buff in Dices)
             {
                 Buff.Enabled = true;
             }
@@ -129,7 +129,7 @@ namespace Prakt_2
         private void PauseGame(object sender, EventArgs e)
         {
             Timer.Enabled = !Timer.Enabled;
-            foreach (Button Buff in buttons)
+            foreach (Button Buff in Dices)
             {
                 Buff.Enabled = !Buff.Enabled;
             }
@@ -153,7 +153,7 @@ namespace Prakt_2
             LabelMoveCount.Location = new Point(LabelTimeSpend.Location.X - LabelMoveCount.Size.Width, LabelTimeSpend.Location.Y);
         }
 
-        private void PressedButtons(object sender, KeyEventArgs e)
+        private void PauseListener(object sender, KeyEventArgs e)
         {
             if (e.KeyValue == 'P' && ButtonPause.Enabled) { PauseGame(new object(), new EventArgs()); }
         }
