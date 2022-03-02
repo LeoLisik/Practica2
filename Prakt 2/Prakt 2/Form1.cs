@@ -65,12 +65,12 @@ namespace Prakt_2
             foreach (Button Buff in Dices)
             {
                 Buff.Enabled = false;
-                Timer.Enabled = false;
             }
+            Timer.Enabled = false;
             MessageBox.Show("Ты выиграл!");
         }
 
-        private void Timer_Tick(object sender, EventArgs e)
+        private void TimeCount(object sender, EventArgs e)
         {
             SecondsSpend++;
             if (SecondsSpend % 10 == 0) { ChangePosition(new object(), new EventArgs()); }
@@ -79,13 +79,13 @@ namespace Prakt_2
 
         private void RandomizeDice()
         {
-            Random rnd = new Random();
+            Random Rnd = new Random();
             int FirstButtonId, LastButtonId;
             string Buff;
             for (int i = 0; i < 50; i++)
             {
-                FirstButtonId = rnd.Next() % 16;
-                LastButtonId = rnd.Next() % 16;
+                FirstButtonId = Rnd.Next() % 16;
+                LastButtonId = Rnd.Next() % 16;
                 Buff = Dices[FirstButtonId].Text;
                 Dices[FirstButtonId].Text = Dices[LastButtonId].Text;
                 Dices[LastButtonId].Text = Buff;
@@ -153,7 +153,7 @@ namespace Prakt_2
             LabelMoveCount.Location = new Point(LabelTimeSpend.Location.X - LabelMoveCount.Size.Width, LabelTimeSpend.Location.Y);
         }
 
-        private void PauseListener(object sender, KeyEventArgs e)
+        private void KeyInputListener(object sender, KeyEventArgs e)
         {
             if (e.KeyValue == 'P' && ButtonPause.Enabled) { PauseGame(new object(), new EventArgs()); }
             if (e.KeyValue == 'W')
