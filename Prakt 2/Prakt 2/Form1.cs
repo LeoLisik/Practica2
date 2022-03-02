@@ -156,6 +156,13 @@ namespace Prakt_2
         private void PauseListener(object sender, KeyEventArgs e)
         {
             if (e.KeyValue == 'P' && ButtonPause.Enabled) { PauseGame(new object(), new EventArgs()); }
+            if (e.KeyValue == 'W')
+            {
+                for (int i = 0; i < 16; i++)
+                {
+                    Dices[i].Text = Convert.ToString(i + 1);
+                }
+            }
         }
     }
 }
