@@ -8,19 +8,19 @@ namespace Prakt_2
     {
         int SecondsSpend, MoveCount;
         Button[] Dices; 
-        public Programm()
+        public Programm() 
         {
             InitializeComponent();
-            ChangePosition(new object(), new EventArgs());
-            Dices = new Button[] { Dice0, Dice1, Dice2, Dice3, Dice4, Dice5, Dice6, Dice7,
-                Dice8, Dice9, Dice10, Dice11, Dice12, Dice13, Dice14, Dice15 };
-            StartGame(new object(), new EventArgs());
+            ChangePosition(new object(), new EventArgs()); //Расчитать позицию при старте
+            Dices = new Button[] { Dice0, Dice1, Dice2, Dice3, Dice4, Dice5, Dice6, Dice7, 
+                Dice8, Dice9, Dice10, Dice11, Dice12, Dice13, Dice14, Dice15 }; //Положить кнопки в массив
+            StartGame(new object(), new EventArgs()); //Запустить игру
         }
 
-        private void MoveDice(object sender, EventArgs e)
+        private void MoveDice(object sender, EventArgs e) //При нажатии на кнопку перемещает 
         {
-            int ButtonPressedId = Array.IndexOf(Dices, sender as Button);
-            if (ButtonPressedId - 4 >= 0 && Dices[ButtonPressedId - 4].Text == "16")
+            int ButtonPressedId = Array.IndexOf(Dices, sender as Button); //Индекс нажадой кнопки в массиве
+            if (ButtonPressedId - 4 >= 0 && Dices[ButtonPressedId - 4].Text == "16") //Если кнопка ниже существует и равна 
             {
                 Dices[ButtonPressedId - 4].Text = Dices[ButtonPressedId].Text; 
                 Dices[ButtonPressedId].Text = "16";
@@ -54,13 +54,13 @@ namespace Prakt_2
             }
         }
 
-        private void IncreaseMoveCount()
+        private void IncreaseMoveCount() //Увеличить счетчик ходов
         {
             MoveCount++;
             LabelMoveCount.Text = "Передвинуто цифр: " + MoveCount;
         }
 
-        private void Win()
+        private void Win() //Выключаем наличие кнопок, таймер и выводим сообщение о победе
         {
             foreach (Button Buff in Dices)
             {
@@ -70,19 +70,19 @@ namespace Prakt_2
             MessageBox.Show("Ты выиграл!");
         }
 
-        private void TimeCount(object sender, EventArgs e)
+        private void TimeCount(object sender, EventArgs e) //Увиличить счетчик секунд
         {
             SecondsSpend++;
             if (SecondsSpend % 10 == 0) { ChangePosition(new object(), new EventArgs()); }
             LabelTimeSpend.Text = "Прошло: " + Convert.ToString(SecondsSpend) + " Сек";
         }
 
-        private void RandomizeDice()
+        private void RandomizeDice() //Размешать кнопки
         {
             Random Rnd = new Random();
             int FirstButtonId, LastButtonId;
             string Buff;
-            for (int i = 0; i < 50; i++)
+            for (int i = 0; i < 50; i++) //50 раз обменять случайные кнопки значениями
             {
                 FirstButtonId = Rnd.Next() % 16;
                 LastButtonId = Rnd.Next() % 16;
@@ -90,7 +90,7 @@ namespace Prakt_2
                 Dices[FirstButtonId].Text = Dices[LastButtonId].Text;
                 Dices[LastButtonId].Text = Buff;
             }
-            foreach (Button buff in Dices)
+            foreach (Button buff in Dices) //Выключить кнопку 16, остальные включить
             {
                 if (buff.Text == "16") { buff.Visible = false; }
                 else { buff.Visible = true; }
@@ -99,14 +99,14 @@ namespace Prakt_2
 
         private bool CheckWin()
         {
-            for (int i = 0; i < 16; i++)
+            for (int i = 0; i < 16; i++) //Проверка чисел в кнопках на соответствие победе
             {
                 if (Convert.ToInt32(Dices[i].Text) != i + 1) { return false; }
             }
             return true;
         }
 
-        private void StartGame(object sender, EventArgs e)
+        private void StartGame(object sender, EventArgs e) //При начале игры размешать кнопки, включить таймер и сбросить значения.
         {
             RandomizeDice();
             Timer.Enabled = true;
@@ -114,8 +114,8 @@ namespace Prakt_2
             LabelMoveCount.Text = "Передвинуто цифр: 0";
             SecondsSpend = 0;
             MoveCount = 0;
-            ButtonPause.Enabled = true;
-            foreach (Button Buff in Dices)
+            ButtonPause.Enabled = true; //Активировать кнопку паузы
+            foreach (Button Buff in Dices) //Включить все кнопки игры
             {
                 Buff.Enabled = true;
             }
@@ -123,12 +123,14 @@ namespace Prakt_2
 
         private void Help(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("https://www.logozavr.ru/1640/");
+            System.Diagnostics.Process.Start("https://www.logozavr.ru/1640/"); //Открыть сайт с правилами
         }
 
-        private void PauseGame(object sender, EventArgs e)
+        private void PauseGame(object sender, EventArgs e) //При паузе остановить таймер, выключить кнопки,
+                                                           //изменить видимость таблицы с кнопками и создать надпись о паузе. 
+                                                           //При снятии с паузы происходит обратное.
         {
-            Timer.Enabled = !Timer.Enabled;
+            Timer.Enabled = !Timer.Enabled; 
             foreach (Button Buff in Dices)
             {
                 Buff.Enabled = !Buff.Enabled;
@@ -142,18 +144,18 @@ namespace Prakt_2
             this.Controls.Add(PauseText);
         }
 
-        private void ExitGame(object sender, EventArgs e)
+        private void ExitGame(object sender, EventArgs e) //Закрыть приложение
         {
             Application.Exit();
         }
 
-        private void ChangePosition(object sender, EventArgs e)
+        private void ChangePosition(object sender, EventArgs e) //Перерасчитать позиции элементов
         {
             LabelTimeSpend.Location = new Point(this.Width - (LabelTimeSpend.Size.Width + (LabelTimeSpend.Size.Width / 2)), 8);
             LabelMoveCount.Location = new Point(LabelTimeSpend.Location.X - LabelMoveCount.Size.Width, LabelTimeSpend.Location.Y);
         }
 
-        private void KeyInputListener(object sender, KeyEventArgs e)
+        private void KeyInputListener(object sender, KeyEventArgs e) //Слушаем ввод и запускаем соотв. функции
         {
             if (e.KeyValue == 'P' && ButtonPause.Enabled) { PauseGame(new object(), new EventArgs()); }
             if (e.KeyValue == 'W')

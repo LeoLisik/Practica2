@@ -30,7 +30,7 @@ namespace Prakt_2
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Programm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Program));
             this.TableMacket = new System.Windows.Forms.TableLayoutPanel();
             this.Dice15 = new System.Windows.Forms.Button();
             this.Dice14 = new System.Windows.Forms.Button();
@@ -398,7 +398,7 @@ namespace Prakt_2
             this.GameMenu.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
             this.GameMenu.Size = new System.Drawing.Size(659, 28);
             this.GameMenu.TabIndex = 1;
-            this.GameMenu.Text = "menuStrip1";
+            this.GameMenu.Text = "GameMenu";
             // 
             // MenuGame
             // 
@@ -468,7 +468,7 @@ namespace Prakt_2
             this.LabelMoveCount.TabIndex = 3;
             this.LabelMoveCount.Text = "Передвинуто цифр: 0";
             // 
-            // Programm
+            // Program
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -483,7 +483,7 @@ namespace Prakt_2
             this.MainMenuStrip = this.GameMenu;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MinimumSize = new System.Drawing.Size(544, 251);
-            this.Name = "Programm";
+            this.Name = "Program";
             this.Text = "Пятнашки";
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.KeyInputListener);
             this.Resize += new System.EventHandler(this.ChangePosition);
