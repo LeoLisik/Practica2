@@ -20,7 +20,7 @@ namespace Prakt_2
         private void MoveDice(object sender, EventArgs e) //При нажатии на кнопку перемещает 
         {
             int ButtonPressedId = Array.IndexOf(Dices, sender as Button); //Индекс нажадой кнопки в массиве
-            if (ButtonPressedId - 4 >= 0 && Dices[ButtonPressedId - 4].Text == "16") //Если кнопка ниже существует и равна 
+            if (ButtonPressedId - 4 >= 0 && Dices[ButtonPressedId - 4].Text == "16") //Если кнопка ниже существует и её значение 16
             {
                 Dices[ButtonPressedId - 4].Text = Dices[ButtonPressedId].Text; 
                 Dices[ButtonPressedId].Text = "16";
