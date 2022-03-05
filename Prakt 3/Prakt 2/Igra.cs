@@ -7,110 +7,122 @@ namespace Prakt_2
 {
     public partial class Programm : Form
     {
-        int SecondsSpend, MoveCount;
-        Button[] buttons; 
-        string[] PlayersResults, SortPlayerResults;
-        Form AccountForm, LeaderboardForm;
+        private int SecondsSpend, MoveCount;
+        private Button[] Dices;
+        private string[] PlayersResults, SortPlayerResults;
+        private Form AccountForm, LeaderboardForm;
 
         public Programm()
         {
             InitializeComponent();
-            ChangePosition(new object(), new EventArgs());
-            buttons = new Button[] { Dice0, Dice1, Dice2, Dice3, Dice4, Dice5, Dice6, Dice7,
-                Dice8, Dice9, Dice10, Dice11, Dice12, Dice13, Dice14, Dice15 };
-            AccountMenu(new object(), new EventArgs());
+            ChangePosition(new object(), new EventArgs()); //Расчитать позицию при старте
+            Dices = new Button[] { Dice0, Dice1, Dice2, Dice3, Dice4, Dice5, Dice6, Dice7,
+                Dice8, Dice9, Dice10, Dice11, Dice12, Dice13, Dice14, Dice15 }; //Положить кнопки в массив
+            AccountMenu(new object(), new EventArgs()); //Запустить авторизацию
         }
 
-        private void MoveDice(object sender, EventArgs e)
+        private void MoveDice(object sender, EventArgs e) //При нажатии на кнопку перемещает 
         {
-            int ButtonPressedId = Array.IndexOf(buttons, sender as Button);
-            if (ButtonPressedId - 4 >= 0 && buttons[ButtonPressedId - 4].Text == "16")
+            int ButtonPressedId = Array.IndexOf(Dices, sender as Button); //Индекс нажадой кнопки в массиве
+            if (ButtonPressedId - 4 >= 0 && Dices[ButtonPressedId - 4].Text == "16") //Если кнопка ниже существует и её значение 16
             {
-                buttons[ButtonPressedId - 4].Text = buttons[ButtonPressedId].Text; 
-                buttons[ButtonPressedId].Text = "16";
-                buttons[ButtonPressedId - 4].Visible = true;
-                buttons[ButtonPressedId].Visible = false;
-                MoveCount++;
-                LabelMoveCount.Text = "Передвинуто цифр: " + MoveCount;
-            } else if (ButtonPressedId + 4 <= 15 && buttons[ButtonPressedId + 4].Text == "16")
-            {
-                buttons[ButtonPressedId + 4].Text = buttons[ButtonPressedId].Text;
-                buttons[ButtonPressedId].Text = "16";
-                buttons[ButtonPressedId + 4].Visible = true;
-                buttons[ButtonPressedId].Visible = false;
-                MoveCount++;
-                LabelMoveCount.Text = "Передвинуто цифр: " + MoveCount;
+                Dices[ButtonPressedId - 4].Text = Dices[ButtonPressedId].Text; //Поменять значения
+                Dices[ButtonPressedId].Text = "16";
+                Dices[ButtonPressedId - 4].Visible = true;
+                Dices[ButtonPressedId].Visible = false;
+                IncreaseMoveCount();
             }
-            if (ButtonPressedId % 4 != 0 && buttons[ButtonPressedId - 1].Text == "16") {
-                buttons[ButtonPressedId - 1].Text = buttons[ButtonPressedId].Text;
-                buttons[ButtonPressedId].Text = "16";
-                buttons[ButtonPressedId - 1].Visible = true;
-                buttons[ButtonPressedId].Visible = false;
-                MoveCount++;
-                LabelMoveCount.Text = "Передвинуто цифр: " + MoveCount;
-            } else if (ButtonPressedId % 4 != 3 && buttons[ButtonPressedId + 1].Text == "16")
+            else if (ButtonPressedId + 4 <= 15 && Dices[ButtonPressedId + 4].Text == "16") //Если кнопка выше существует
             {
-                buttons[ButtonPressedId + 1].Text = buttons[ButtonPressedId].Text;
-                buttons[ButtonPressedId].Text = "16";
-                buttons[ButtonPressedId + 1].Visible = true;
-                buttons[ButtonPressedId].Visible = false;
-                MoveCount++;
-                LabelMoveCount.Text = "Передвинуто цифр: " + MoveCount;
+                Dices[ButtonPressedId + 4].Text = Dices[ButtonPressedId].Text; //Поменять значения
+                Dices[ButtonPressedId].Text = "16";
+                Dices[ButtonPressedId + 4].Visible = true;
+                Dices[ButtonPressedId].Visible = false;
+                IncreaseMoveCount();
             }
-            if (CheckWin()) {
+            if (ButtonPressedId % 4 != 0 && Dices[ButtonPressedId - 1].Text == "16") //Если кнопка слева в том же ряду
+            {
+                Dices[ButtonPressedId - 1].Text = Dices[ButtonPressedId].Text; //Поменять значения
+                Dices[ButtonPressedId].Text = "16";
+                Dices[ButtonPressedId - 1].Visible = true;
+                Dices[ButtonPressedId].Visible = false;
+                IncreaseMoveCount();
+            }
+            else if (ButtonPressedId % 4 != 3 && Dices[ButtonPressedId + 1].Text == "16") //Если кнопка справа в том же ряду
+            {
+                Dices[ButtonPressedId + 1].Text = Dices[ButtonPressedId].Text; //Поменять значения
+                Dices[ButtonPressedId].Text = "16";
+                Dices[ButtonPressedId + 1].Visible = true;
+                Dices[ButtonPressedId].Visible = false;
+                IncreaseMoveCount();
+            }
+            if (CheckWin())
+            { //Если условия победы выполнены
                 Win();
             }
         }
 
-        private void Win()
+        private void IncreaseMoveCount() //Увеличить счетчик ходов
         {
-            foreach (Button Buff in buttons)
+            MoveCount++;
+            LabelMoveCount.Text = "Передвинуто цифр: " + MoveCount;
+        }
+
+        private void Win() //Выключаем наличие кнопок, таймер и выводим сообщение о победе
+        {
+            foreach (Button Buff in Dices)
             {
                 Buff.Enabled = false;
-                Timer.Enabled = false;
             }
+            Timer.Enabled = false;
             MessageBox.Show("Ты выиграл!");
-            if (Data.Value != null && File.Exists("Leaderboard.txt"))
+            if (Data.Value != null && File.Exists("Leaderboard.txt")) //Если имя пользователя не null и файл лидеров существует
             {
                 string[] Leaders = File.ReadAllLines("Leaderboard.txt");
-                for (int i = 0; i < Leaders.Length; i++)
+                try
                 {
-                    if (Data.Value == Leaders[i].Split(':')[0] && SecondsSpend < Convert.ToInt32(Leaders[i].Split(':')[1]))
+                    for (int i = 0; i < Leaders.Length; i++) //Перебрать все строчки в лидерах
                     {
-                        Leaders[i] = Data.Value + ':' + SecondsSpend + ':' + MoveCount;
-                        File.WriteAllLines("Leaderboard.txt", Leaders);
-                        MessageBox.Show("Твой результат обновлён!");
-                        return;
+                        if (Data.Value == Leaders[i].Split(':')[0] && SecondsSpend < Convert.ToInt32(Leaders[i].Split(':')[1])) //Если имя совпадёт с текущим пользователем и счет лучше - перезаписать
+                        {
+                            Leaders[i] = Data.Value + ':' + SecondsSpend + ':' + MoveCount; 
+                            File.WriteAllLines("Leaderboard.txt", Leaders);
+                            MessageBox.Show("Твой результат обновлён!");
+                            return;
+                        } else if (Data.Value == Leaders[i].Split(':')[0])
+                        {
+                            return;
+                        }
                     }
-                }
-                StreamWriter sw = new StreamWriter("Leaderboard.txt", true);
-                sw.WriteLine(Data.Value + ':' + SecondsSpend + ':' + MoveCount);
-                sw.Close();
-                MessageBox.Show("Твой результат был записан в рекорды.");
+                    StreamWriter sw = new StreamWriter("Leaderboard.txt", true); //Если записей этого пользователя нет, то записать рекорд
+                    sw.WriteLine(Data.Value + ':' + SecondsSpend + ':' + MoveCount);
+                    sw.Close();
+                    MessageBox.Show("Твой результат был записан в рекорды.");
+                } catch { MessageBox.Show("Файлы программы повреждены. Попробуйте переустановить программу."); }
             } else { MessageBox.Show("Для записи рекордов зарегистрируйся.\nЕсли по прежнему появляется это сообщение - переустанови программу."); }
         }
 
-        private void Timer_Tick(object sender, EventArgs e)
+        private void TimeCount(object sender, EventArgs e) //Увеличить счетчик секунд
         {
             SecondsSpend++;
             if (SecondsSpend % 10 == 0) { ChangePosition(new object(), new EventArgs()); }
             LabelTimeSpend.Text = "Прошло: " + Convert.ToString(SecondsSpend) + " Сек";
         }
 
-        private void RandomizeDice()
+        private void RandomizeDice() //Размешать кнопки
         {
-            Random rnd = new Random();
+            Random Rnd = new Random();
             int FirstButtonId, LastButtonId;
             string Buff;
-            for (int i = 0; i < 50; i++)
+            for (int i = 0; i < 50; i++) //50 раз обменять случайные кнопки значениями
             {
-                FirstButtonId = rnd.Next() % 16;
-                LastButtonId = rnd.Next() % 16;
-                Buff = buttons[FirstButtonId].Text;
-                buttons[FirstButtonId].Text = buttons[LastButtonId].Text;
-                buttons[LastButtonId].Text = Buff;
+                FirstButtonId = Rnd.Next() % 16;
+                LastButtonId = Rnd.Next() % 16;
+                Buff = Dices[FirstButtonId].Text;
+                Dices[FirstButtonId].Text = Dices[LastButtonId].Text;
+                Dices[LastButtonId].Text = Buff;
             }
-            foreach (Button buff in buttons)
+            foreach (Button buff in Dices) //Выключить кнопку 16, остальные включить
             {
                 if (buff.Text == "16") { buff.Visible = false; }
                 else { buff.Visible = true; }
@@ -119,14 +131,14 @@ namespace Prakt_2
 
         private bool CheckWin()
         {
-            for (int i = 0; i < 16; i++)
+            for (int i = 0; i < 16; i++) //Проверка чисел в кнопках на соответствие победе
             {
-                if (Convert.ToInt32(buttons[i].Text) != i + 1) { return false; }
+                if (Convert.ToInt32(Dices[i].Text) != i + 1) { return false; }
             }
             return true;
         }
 
-        private void StartGame(object sender, EventArgs e)
+        private void StartGame(object sender, EventArgs e) //При начале игры размешать кнопки, включить таймер и сбросить значения.
         {
             RandomizeDice();
             Timer.Enabled = true;
@@ -134,8 +146,8 @@ namespace Prakt_2
             LabelMoveCount.Text = "Передвинуто цифр: 0";
             SecondsSpend = 0;
             MoveCount = 0;
-            ButtonPause.Enabled = true;
-            foreach (Button Buff in buttons)
+            ButtonPause.Enabled = true; //Активировать кнопку паузы
+            foreach (Button Buff in Dices) //Включить все кнопки игры
             {
                 Buff.Enabled = true;
             }
@@ -143,53 +155,57 @@ namespace Prakt_2
 
         private void Help(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("https://www.logozavr.ru/1640/");
+            System.Diagnostics.Process.Start("https://www.logozavr.ru/1640/"); //Открыть сайт с правилами
         }
 
-        private void PauseGame(object sender, EventArgs e)
+        private void PauseGame(object sender, EventArgs e) //При паузе остановить таймер, выключить кнопки,
+                                                           //изменить видимость таблицы с кнопками и создать надпись о паузе. 
+                                                           //При снятии с паузы происходит обратное.
         {
             Timer.Enabled = !Timer.Enabled;
-            foreach (Button Buff in buttons)
+            foreach (Button Buff in Dices)
             {
                 Buff.Enabled = !Buff.Enabled;
             }
             TableMacket.Visible = !TableMacket.Visible;
             Label PauseText = new Label();
             PauseText.AutoSize = true;
+            PauseText.Font = new Font("Sans-serif", 11);
             PauseText.Text = "Игра на паузе. Нажмите P для продолжения...";
             PauseText.Location = new Point(this.Width / 2 - PauseText.Size.Width, this.Height / 2);
             this.Controls.Add(PauseText);
         }
 
-        private void ExitGame(object sender, EventArgs e)
+        private void ExitGame(object sender, EventArgs e) //Закрыть приложение
         {
             Application.Exit();
         }
 
-        private void ChangePosition(object sender, EventArgs e)
+        private void ChangePosition(object sender, EventArgs e) //Перерасчитать позиции элементов
         {
             LabelTimeSpend.Location = new Point(this.Width - (LabelTimeSpend.Size.Width + (LabelTimeSpend.Size.Width / 2)), 8);
             LabelMoveCount.Location = new Point(LabelTimeSpend.Location.X - LabelMoveCount.Size.Width, LabelTimeSpend.Location.Y);
         }
 
-        private void PressedButtons(object sender, KeyEventArgs e)
+        private void KeyInputListener(object sender, KeyEventArgs e) //Слушаем ввод и запускаем соотв. функции
         {
             if (e.KeyValue == 'P' && ButtonPause.Enabled) { PauseGame(new object(), new EventArgs()); }
-            if (e.KeyValue == 'W') {
+            if (e.KeyValue == 'W')
+            {
                 for (int i = 0; i < 16; i++)
                 {
-                    buttons[i].Text = Convert.ToString(i+1);
+                    Dices[i].Text = Convert.ToString(i + 1);
                 }
             }
         }
 
         private void AccountMenu(object sender, EventArgs e)
         {
-            if (buttons[15].Enabled == true)
+            if (Dices[15].Enabled == true)
             {
                 PauseGame(new object(), new EventArgs());
             }
-            AccountForm = new RegisterForm();
+            AccountForm = new AuthorizeForm();
             AccountForm.ShowDialog();
         }
 
@@ -239,7 +255,7 @@ namespace Prakt_2
             StatisticLegend.Location = new Point(10, SmarterPlayerStats.Location.Y + SmarterPlayerStats.Size.Height + StatisticLegend.Size.Height / 2);
             LeaderboardForm.Controls.Add(StatisticLegend);
             //////////////////////////////////////
-            DataProcessingLeaders();
+            SortLeaders();
             Label[] StatsLabels = new Label[SortPlayerResults.Length];
             for (int i = 0; i < SortPlayerResults.Length; i++)
             {
@@ -254,7 +270,7 @@ namespace Prakt_2
             LeaderboardForm.Show();
         }
 
-        private void DataProcessingLeaders()
+        private void SortLeaders()
         {
             SortPlayerResults = File.ReadAllLines("Leaderboard.txt");
             string temp;

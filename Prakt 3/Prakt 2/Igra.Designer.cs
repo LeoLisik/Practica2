@@ -115,7 +115,7 @@ namespace Prakt_2
             this.Dice15.UseVisualStyleBackColor = false;
             this.Dice15.Visible = false;
             this.Dice15.Click += new System.EventHandler(this.MoveDice);
-            this.Dice15.KeyUp += new System.Windows.Forms.KeyEventHandler(this.PressedButtons);
+            this.Dice15.KeyUp += new System.Windows.Forms.KeyEventHandler(this.KeyInputListener);
             // 
             // Dice14
             // 
@@ -132,7 +132,7 @@ namespace Prakt_2
             this.Dice14.Text = "15";
             this.Dice14.UseVisualStyleBackColor = false;
             this.Dice14.Click += new System.EventHandler(this.MoveDice);
-            this.Dice14.KeyUp += new System.Windows.Forms.KeyEventHandler(this.PressedButtons);
+            this.Dice14.KeyUp += new System.Windows.Forms.KeyEventHandler(this.KeyInputListener);
             // 
             // Dice13
             // 
@@ -149,7 +149,7 @@ namespace Prakt_2
             this.Dice13.Text = "14";
             this.Dice13.UseVisualStyleBackColor = false;
             this.Dice13.Click += new System.EventHandler(this.MoveDice);
-            this.Dice13.KeyUp += new System.Windows.Forms.KeyEventHandler(this.PressedButtons);
+            this.Dice13.KeyUp += new System.Windows.Forms.KeyEventHandler(this.KeyInputListener);
             // 
             // Dice12
             // 
@@ -166,7 +166,7 @@ namespace Prakt_2
             this.Dice12.Text = "13";
             this.Dice12.UseVisualStyleBackColor = false;
             this.Dice12.Click += new System.EventHandler(this.MoveDice);
-            this.Dice12.KeyUp += new System.Windows.Forms.KeyEventHandler(this.PressedButtons);
+            this.Dice12.KeyUp += new System.Windows.Forms.KeyEventHandler(this.KeyInputListener);
             // 
             // Dice11
             // 
@@ -183,7 +183,7 @@ namespace Prakt_2
             this.Dice11.Text = "12";
             this.Dice11.UseVisualStyleBackColor = false;
             this.Dice11.Click += new System.EventHandler(this.MoveDice);
-            this.Dice11.KeyUp += new System.Windows.Forms.KeyEventHandler(this.PressedButtons);
+            this.Dice11.KeyUp += new System.Windows.Forms.KeyEventHandler(this.KeyInputListener);
             // 
             // Dice10
             // 
@@ -200,7 +200,7 @@ namespace Prakt_2
             this.Dice10.Text = "11";
             this.Dice10.UseVisualStyleBackColor = false;
             this.Dice10.Click += new System.EventHandler(this.MoveDice);
-            this.Dice10.KeyUp += new System.Windows.Forms.KeyEventHandler(this.PressedButtons);
+            this.Dice10.KeyUp += new System.Windows.Forms.KeyEventHandler(this.KeyInputListener);
             // 
             // Dice9
             // 
@@ -217,7 +217,7 @@ namespace Prakt_2
             this.Dice9.Text = "10";
             this.Dice9.UseVisualStyleBackColor = false;
             this.Dice9.Click += new System.EventHandler(this.MoveDice);
-            this.Dice9.KeyUp += new System.Windows.Forms.KeyEventHandler(this.PressedButtons);
+            this.Dice9.KeyUp += new System.Windows.Forms.KeyEventHandler(this.KeyInputListener);
             // 
             // Dice8
             // 
@@ -234,7 +234,7 @@ namespace Prakt_2
             this.Dice8.Text = "9";
             this.Dice8.UseVisualStyleBackColor = false;
             this.Dice8.Click += new System.EventHandler(this.MoveDice);
-            this.Dice8.KeyUp += new System.Windows.Forms.KeyEventHandler(this.PressedButtons);
+            this.Dice8.KeyUp += new System.Windows.Forms.KeyEventHandler(this.KeyInputListener);
             // 
             // Dice7
             // 
@@ -251,7 +251,7 @@ namespace Prakt_2
             this.Dice7.Text = "8";
             this.Dice7.UseVisualStyleBackColor = false;
             this.Dice7.Click += new System.EventHandler(this.MoveDice);
-            this.Dice7.KeyUp += new System.Windows.Forms.KeyEventHandler(this.PressedButtons);
+            this.Dice7.KeyUp += new System.Windows.Forms.KeyEventHandler(this.KeyInputListener);
             // 
             // Dice6
             // 
@@ -268,7 +268,7 @@ namespace Prakt_2
             this.Dice6.Text = "7";
             this.Dice6.UseVisualStyleBackColor = false;
             this.Dice6.Click += new System.EventHandler(this.MoveDice);
-            this.Dice6.KeyUp += new System.Windows.Forms.KeyEventHandler(this.PressedButtons);
+            this.Dice6.KeyUp += new System.Windows.Forms.KeyEventHandler(this.KeyInputListener);
             // 
             // Dice5
             // 
@@ -285,7 +285,7 @@ namespace Prakt_2
             this.Dice5.Text = "6";
             this.Dice5.UseVisualStyleBackColor = false;
             this.Dice5.Click += new System.EventHandler(this.MoveDice);
-            this.Dice5.KeyUp += new System.Windows.Forms.KeyEventHandler(this.PressedButtons);
+            this.Dice5.KeyUp += new System.Windows.Forms.KeyEventHandler(this.KeyInputListener);
             // 
             // Dice4
             // 
@@ -302,7 +302,7 @@ namespace Prakt_2
             this.Dice4.Text = "5";
             this.Dice4.UseVisualStyleBackColor = false;
             this.Dice4.Click += new System.EventHandler(this.MoveDice);
-            this.Dice4.KeyUp += new System.Windows.Forms.KeyEventHandler(this.PressedButtons);
+            this.Dice4.KeyUp += new System.Windows.Forms.KeyEventHandler(this.KeyInputListener);
             // 
             // Dice3
             // 
@@ -319,7 +319,7 @@ namespace Prakt_2
             this.Dice3.Text = "4";
             this.Dice3.UseVisualStyleBackColor = false;
             this.Dice3.Click += new System.EventHandler(this.MoveDice);
-            this.Dice3.KeyUp += new System.Windows.Forms.KeyEventHandler(this.PressedButtons);
+            this.Dice3.KeyUp += new System.Windows.Forms.KeyEventHandler(this.KeyInputListener);
             // 
             // Dice1
             // 
@@ -336,7 +336,7 @@ namespace Prakt_2
             this.Dice1.Text = "2";
             this.Dice1.UseVisualStyleBackColor = false;
             this.Dice1.Click += new System.EventHandler(this.MoveDice);
-            this.Dice1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.PressedButtons);
+            this.Dice1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.KeyInputListener);
             // 
             // Dice0
             // 
@@ -353,7 +353,7 @@ namespace Prakt_2
             this.Dice0.Text = "1";
             this.Dice0.UseVisualStyleBackColor = false;
             this.Dice0.Click += new System.EventHandler(this.MoveDice);
-            this.Dice0.KeyUp += new System.Windows.Forms.KeyEventHandler(this.PressedButtons);
+            this.Dice0.KeyUp += new System.Windows.Forms.KeyEventHandler(this.KeyInputListener);
             // 
             // Dice2
             // 
@@ -370,7 +370,7 @@ namespace Prakt_2
             this.Dice2.Text = "3";
             this.Dice2.UseVisualStyleBackColor = false;
             this.Dice2.Click += new System.EventHandler(this.MoveDice);
-            this.Dice2.KeyUp += new System.Windows.Forms.KeyEventHandler(this.PressedButtons);
+            this.Dice2.KeyUp += new System.Windows.Forms.KeyEventHandler(this.KeyInputListener);
             // 
             // GameMenu
             // 
@@ -444,7 +444,7 @@ namespace Prakt_2
             // Timer
             // 
             this.Timer.Interval = 1000;
-            this.Timer.Tick += new System.EventHandler(this.Timer_Tick);
+            this.Timer.Tick += new System.EventHandler(this.TimeCount);
             // 
             // LabelTimeSpend
             // 
@@ -483,7 +483,7 @@ namespace Prakt_2
             this.MinimumSize = new System.Drawing.Size(619, 298);
             this.Name = "Programm";
             this.Text = "Пятнашки";
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.PressedButtons);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.KeyInputListener);
             this.Resize += new System.EventHandler(this.ChangePosition);
             this.TableMacket.ResumeLayout(false);
             this.GameMenu.ResumeLayout(false);

@@ -22,34 +22,35 @@ namespace Prakt_2
             int ButtonPressedId = Array.IndexOf(Dices, sender as Button); //Индекс нажадой кнопки в массиве
             if (ButtonPressedId - 4 >= 0 && Dices[ButtonPressedId - 4].Text == "16") //Если кнопка ниже существует и её значение 16
             {
-                Dices[ButtonPressedId - 4].Text = Dices[ButtonPressedId].Text; 
+                Dices[ButtonPressedId - 4].Text = Dices[ButtonPressedId].Text; //Поменять значения
                 Dices[ButtonPressedId].Text = "16";
                 Dices[ButtonPressedId - 4].Visible = true;
                 Dices[ButtonPressedId].Visible = false;
                 IncreaseMoveCount();
-            } else if (ButtonPressedId + 4 <= 15 && Dices[ButtonPressedId + 4].Text == "16")
+            } else if (ButtonPressedId + 4 <= 15 && Dices[ButtonPressedId + 4].Text == "16") //Если кнопка выше существует
             {
-                Dices[ButtonPressedId + 4].Text = Dices[ButtonPressedId].Text;
+                Dices[ButtonPressedId + 4].Text = Dices[ButtonPressedId].Text; //Поменять значения
                 Dices[ButtonPressedId].Text = "16";
                 Dices[ButtonPressedId + 4].Visible = true;
                 Dices[ButtonPressedId].Visible = false;
                 IncreaseMoveCount();
             }
-            if (ButtonPressedId % 4 != 0 && Dices[ButtonPressedId - 1].Text == "16") {
-                Dices[ButtonPressedId - 1].Text = Dices[ButtonPressedId].Text;
+            if (ButtonPressedId % 4 != 0 && Dices[ButtonPressedId - 1].Text == "16") //Если кнопка слева в том же ряду
+            { 
+                Dices[ButtonPressedId - 1].Text = Dices[ButtonPressedId].Text; //Поменять значения
                 Dices[ButtonPressedId].Text = "16";
                 Dices[ButtonPressedId - 1].Visible = true;
                 Dices[ButtonPressedId].Visible = false;
                 IncreaseMoveCount();
-            } else if (ButtonPressedId % 4 != 3 && Dices[ButtonPressedId + 1].Text == "16")
+            } else if (ButtonPressedId % 4 != 3 && Dices[ButtonPressedId + 1].Text == "16") //Если кнопка справа в том же ряду
             {
-                Dices[ButtonPressedId + 1].Text = Dices[ButtonPressedId].Text;
+                Dices[ButtonPressedId + 1].Text = Dices[ButtonPressedId].Text; //Поменять значения
                 Dices[ButtonPressedId].Text = "16";
                 Dices[ButtonPressedId + 1].Visible = true;
                 Dices[ButtonPressedId].Visible = false;
                 IncreaseMoveCount();
             }
-            if (CheckWin()) {
+            if (CheckWin()) { //Если условия победы выполнены
                 Win();
             }
         }

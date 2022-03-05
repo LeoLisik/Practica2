@@ -12,10 +12,10 @@ using BCrypt;
 
 namespace Prakt_2
 {
-    public partial class RegisterForm : Form
+    public partial class AuthorizeForm : Form
     {
         private string SavedLoginText;
-        public RegisterForm()
+        public AuthorizeForm()
         {
             InitializeComponent();
             RepeatPasswordPlace.Text = "Не требуется для входа";

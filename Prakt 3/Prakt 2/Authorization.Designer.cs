@@ -1,7 +1,7 @@
 ﻿
 namespace Prakt_2
 {
-    partial class RegisterForm
+    partial class AuthorizeForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@ namespace Prakt_2
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RegisterForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AuthorizeForm));
             this.LoginPlace = new System.Windows.Forms.TextBox();
             this.PasswordPlace = new System.Windows.Forms.TextBox();
             this.ButtonRegister = new System.Windows.Forms.Button();
@@ -129,7 +129,7 @@ namespace Prakt_2
             this.NonAuthorizeButton.UseVisualStyleBackColor = false;
             this.NonAuthorizeButton.Click += new System.EventHandler(this.NonAuthorizeEnter);
             // 
-            // RegisterForm
+            // AuthorizeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -148,7 +148,7 @@ namespace Prakt_2
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(326, 252);
             this.MinimumSize = new System.Drawing.Size(326, 252);
-            this.Name = "RegisterForm";
+            this.Name = "AuthorizeForm";
             this.Text = "Вход";
             this.ResumeLayout(false);
             this.PerformLayout();
