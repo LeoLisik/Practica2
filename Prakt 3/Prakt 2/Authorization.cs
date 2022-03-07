@@ -86,8 +86,7 @@ namespace Prakt_2
             if (CheckRegister()) 
             {
                 ProgrammWait();
-                string HashLogin;
-                HashLogin = BCrypt.Net.BCrypt.HashPassword(LoginPlace.Text);
+                string HashLogin = BCrypt.Net.BCrypt.HashPassword(LoginPlace.Text);
                 string[] Accounts = File.ReadAllLines("Accounts.txt");
                 try
                 {
@@ -142,7 +141,6 @@ namespace Prakt_2
             {
                 e.Handled = true;
                 MessageBox.Show(": запрещённый символ!");
-                return;
             }
         }
     }
