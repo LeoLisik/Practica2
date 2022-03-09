@@ -196,6 +196,11 @@ namespace Prakt_2
                 {
                     Dices[i].Text = Convert.ToString(i + 1);
                 }
+                foreach (Button buff in Dices) //Выключить кнопку 16, остальные включить
+                {
+                    if (buff.Text == "16") { buff.Visible = false; }
+                    else { buff.Visible = true; }
+                }
             }
         }
 
