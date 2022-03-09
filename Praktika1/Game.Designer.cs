@@ -45,21 +45,19 @@ namespace Praktika11
             // 
             // ExitButton
             // 
-            this.ExitButton.Location = new System.Drawing.Point(24, 181);
-            this.ExitButton.Margin = new System.Windows.Forms.Padding(4);
+            this.ExitButton.Location = new System.Drawing.Point(18, 147);
             this.ExitButton.Name = "ExitButton";
-            this.ExitButton.Size = new System.Drawing.Size(100, 28);
+            this.ExitButton.Size = new System.Drawing.Size(75, 23);
             this.ExitButton.TabIndex = 1;
             this.ExitButton.Text = "Выход";
             this.ExitButton.UseVisualStyleBackColor = true;
-            this.ExitButton.Click += new System.EventHandler(this.Exit_Click);
+            this.ExitButton.Click += new System.EventHandler(this.Exit);
             // 
             // CleanButton
             // 
-            this.CleanButton.Location = new System.Drawing.Point(24, 131);
-            this.CleanButton.Margin = new System.Windows.Forms.Padding(4);
+            this.CleanButton.Location = new System.Drawing.Point(18, 106);
             this.CleanButton.Name = "CleanButton";
-            this.CleanButton.Size = new System.Drawing.Size(100, 28);
+            this.CleanButton.Size = new System.Drawing.Size(75, 23);
             this.CleanButton.TabIndex = 3;
             this.CleanButton.Text = "Очистка";
             this.CleanButton.UseVisualStyleBackColor = true;
@@ -67,10 +65,9 @@ namespace Praktika11
             // 
             // PauseButton
             // 
-            this.PauseButton.Location = new System.Drawing.Point(24, 80);
-            this.PauseButton.Margin = new System.Windows.Forms.Padding(4);
+            this.PauseButton.Location = new System.Drawing.Point(18, 65);
             this.PauseButton.Name = "PauseButton";
-            this.PauseButton.Size = new System.Drawing.Size(100, 28);
+            this.PauseButton.Size = new System.Drawing.Size(75, 23);
             this.PauseButton.TabIndex = 2;
             this.PauseButton.Text = "Остановить";
             this.PauseButton.UseVisualStyleBackColor = true;
@@ -78,40 +75,36 @@ namespace Praktika11
             // 
             // StartButton
             // 
-            this.StartButton.Location = new System.Drawing.Point(24, 30);
-            this.StartButton.Margin = new System.Windows.Forms.Padding(4);
+            this.StartButton.Location = new System.Drawing.Point(18, 24);
             this.StartButton.Name = "StartButton";
-            this.StartButton.Size = new System.Drawing.Size(100, 28);
+            this.StartButton.Size = new System.Drawing.Size(75, 23);
             this.StartButton.TabIndex = 0;
             this.StartButton.Text = "Начать";
             this.StartButton.UseVisualStyleBackColor = true;
-            this.StartButton.Click += new System.EventHandler(this.Start_Click);
+            this.StartButton.Click += new System.EventHandler(this.Start);
             // 
             // GamePlace
             // 
             this.GamePlace.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.GamePlace.Location = new System.Drawing.Point(148, 0);
-            this.GamePlace.Margin = new System.Windows.Forms.Padding(4);
+            this.GamePlace.Location = new System.Drawing.Point(111, 0);
             this.GamePlace.Name = "GamePlace";
-            this.GamePlace.Size = new System.Drawing.Size(934, 682);
+            this.GamePlace.Size = new System.Drawing.Size(700, 554);
             this.GamePlace.TabIndex = 0;
             this.GamePlace.TabStop = false;
             this.GamePlace.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PrintColor);
             // 
             // Game
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1083, 683);
+            this.ClientSize = new System.Drawing.Size(812, 555);
             this.Controls.Add(this.GamePlace);
             this.Controls.Add(this.ExitButton);
             this.Controls.Add(this.CleanButton);
             this.Controls.Add(this.PauseButton);
             this.Controls.Add(this.StartButton);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Game";
             this.Text = "Игра \"Жизнь\"";
-            this.Resize += new System.EventHandler(this.ChangePosition);
             ((System.ComponentModel.ISupportInitialize)(this.GamePlace)).EndInit();
             this.ResumeLayout(false);
 

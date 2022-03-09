@@ -16,7 +16,7 @@ namespace Praktika11
         public Game() //создание формы
         {
             InitializeComponent();
-            ChangePosition(new object(), new EventArgs());
+            StartCalcVariable(new object(), new EventArgs());
         }
 
         private void StartGame()  //При начале игры запустить таймер
@@ -46,6 +46,7 @@ namespace Praktika11
             }
             return CountNeighbors;
         }
+
         private void NextGeneration()  //Просчет следующего поколения
         {
             Grafica.Clear(Color.White);  //Очистить поле
@@ -79,6 +80,7 @@ namespace Praktika11
                         Grafica.FillRectangle(Brushes.Red, x * CellSize, y * CellSize, CellSize - 1, CellSize - 1);
                         continue; 
                     }
+                    /////////////////////////////////////////////////
                     if (!IsAliveRed && NeighborsRed == 3)  //если клетка пуста и 3 соседа красных 
                     {
                         NewRedCells[x, y] = true; 
@@ -91,6 +93,7 @@ namespace Praktika11
                     {
                         NewRedCells[x, y] = RedCells[x, y];
                     }
+                    ////////////////////////////////////////////////
                     if (!IsAliveBlue && NeighborsBlue == 3) //если клетка пуста и имеет 3 соседа синих
                     {
                         NewBlueCells[x, y] = true; 
@@ -103,6 +106,7 @@ namespace Praktika11
                     {
                         NewBlueCells[x, y] = BlueCells[x, y];
                     }
+                    /////////////////////////////////////////////
                     if (NewRedCells[x, y])  //Если клетка по координатам красная, то покрасить клетку
                     {
                         Grafica.FillRectangle(Brushes.Red, x * CellSize, y * CellSize, CellSize - 1, CellSize - 1);
@@ -117,67 +121,74 @@ namespace Praktika11
             BlueCells = NewBlueCells;  
             GamePlace.Refresh();  //Отрисовываются изменения
         }
+
         private void TimerTick(object sender, EventArgs e)  //Каждый тик расчитывать новое поколение
         {
             NextGeneration(); 
         }
+
         private void PauseClick(object sender, EventArgs e)  //Пауза
         {
             Timer.Enabled = !Timer.Enabled;
         }
+
         private void PrintColor(object sender, MouseEventArgs e)  //Закрасить клетку
         {
             if (Timer.Enabled)  //Если таймер включен, то рисовать нельзя
             {
                 return;
             }
-            int x = e.Location.X / CellSize;  //координаты клика
-            int y = e.Location.Y / CellSize;  
+            int MousePosX = e.Location.X / CellSize;  //координаты клика
+            int MousePosY = e.Location.Y / CellSize;  
 
-            if (ClickPositionCheck(x, y))  //если координата клетки в пределах поля
+            if (ClickPositionCheck(MousePosX, MousePosY))  //если координата клетки в пределах поля
             {
                 if (e.Button == MouseButtons.Left)  //если нажата ЛКМ
                 {
-                    if (RedCells[x, y])  //если клетка уже существует - стереть
+                    if (RedCells[MousePosX, MousePosY])  //если клетка уже существует - стереть
                     {
-                        RedCells[x, y] = false;  
-                        Grafica.FillRectangle(Brushes.White, x * CellSize, y * CellSize, CellSize - 1, CellSize - 1);
+                        RedCells[MousePosX, MousePosY] = false;  
+                        Grafica.FillRectangle(Brushes.White, MousePosX * CellSize, MousePosY * CellSize, CellSize - 1, CellSize - 1);
                     }
                     else  //если клетки ещё не существует - создать
                     {
-                        RedCells[x, y] = true;  
-                        Grafica.FillRectangle(Brushes.Red, x * CellSize, y * CellSize, CellSize - 1, CellSize - 1);
+                        RedCells[MousePosX, MousePosY] = true;  
+                        Grafica.FillRectangle(Brushes.Red, MousePosX * CellSize, MousePosY * CellSize, CellSize - 1, CellSize - 1);
                     }
                 }
                 if (e.Button == MouseButtons.Right)  //если нажата ПКМ
                 {
-                    if (BlueCells[x, y])  //если клетка уже существует - стереть
+                    if (BlueCells[MousePosX, MousePosY])  //если клетка уже существует - стереть
                     {
-                        BlueCells[x, y] = false; 
-                        Grafica.FillRectangle(Brushes.White, x * CellSize, y * CellSize, CellSize - 1, CellSize - 1);
+                        BlueCells[MousePosX, MousePosY] = false; 
+                        Grafica.FillRectangle(Brushes.White, MousePosX * CellSize, MousePosY * CellSize, CellSize - 1, CellSize - 1);
                     }
                     else  //если клетки ещё не существует - создать
                     {
-                        BlueCells[x, y] = true;
-                        Grafica.FillRectangle(Brushes.Blue, x * CellSize, y * CellSize, CellSize - 1, CellSize - 1);
+                        BlueCells[MousePosX, MousePosY] = true;
+                        Grafica.FillRectangle(Brushes.Blue, MousePosX * CellSize, MousePosY * CellSize, CellSize - 1, CellSize - 1);
                     }
                 }
             }
             GamePlace.Refresh();  //Отобразить изменения
         }
-        private bool ClickPositionCheck(int x, int y)  //Проверка нахождение клика в границах поля
+
+        private bool ClickPositionCheck(int MousePosX, int MousePosY)  //Проверка нахождение клика в границах поля
         {
-            return x >= 0 && y >= 0 && x < Columns && y < Rows;  
+            return MousePosX >= 0 && MousePosY >= 0 && MousePosX < Columns && MousePosY < Rows;  
         }
-        private void Start_Click(object sender, EventArgs e) //Запустить игру при нажатии кнопки
+
+        private void Start(object sender, EventArgs e) //Запустить игру при нажатии кнопки
         {
             StartGame(); 
         }
-        private void Exit_Click(object sender, EventArgs e) //Закрыть приложение
+
+        private void Exit(object sender, EventArgs e) //Закрыть приложение
         {
             Application.Exit(); 
         }
-        private void ChangePosition(object sender, EventArgs e)
+
+        private void StartCalcVariable(object sender, EventArgs e)
         {
             Rows = GamePlace.Height / CellSize; 
             Columns = GamePlace.Width / CellSize; 
@@ -187,9 +198,10 @@ namespace Praktika11
             Grafica = Graphics.FromImage(GamePlace.Image);  //Переносим сетку в изображение
             Grafica.Clear(Color.White);  //Заполняем графику белым цветом
         }
+
         private void ClearColors(object sender, EventArgs e)
         {
-            Timer.Enabled = false;  //остановить таймер
+            Timer.Enabled = false;  
             GamePlace.Image = new Bitmap(GamePlace.Width, GamePlace.Height);  //Создать новое поле 
             Grafica = Graphics.FromImage(GamePlace.Image);  //Инициализировать переменную Grafica полем 
             Grafica.Clear(Color.White);  //заполнение поля белым цветом
